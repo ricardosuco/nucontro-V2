@@ -1,4 +1,4 @@
-# nucontro-V2
+# nucontrole-V2
 Nova versão do [nucontrole](https://github.com/ricardosuco/nucontrole) adotando melhores práticas.
 
 A versão anterior estava com o backend feito no supabase (que infelizmente foi desativado), e utilizando uma mistura de options com composition api do Vue.
