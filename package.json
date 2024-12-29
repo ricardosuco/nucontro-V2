@@ -7,6 +7,9 @@
     "dev": "nuxt dev",
     "lint:prettier:check": "prettier --check .",
     "lint:prettier:fix": "prettier --write .",
+    "lint:eslint:check": "eslint .",
+    "lint:eslint:fix": "eslint --fix .",
+    "lint:fix": "npm run lint:prettier:fix && npm run lint:eslint:fix",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -17,6 +20,10 @@
     "vue-router": "latest"
   },
   "devDependencies": {
-    "prettier": "^3.4.2"
+    "@nuxt/eslint": "^0.7.4",
+    "eslint": "^9.17.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2",
+    "vite-plugin-eslint2": "^5.0.3"
   }
 }
