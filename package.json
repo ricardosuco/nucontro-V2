@@ -2,6 +2,9 @@
   "name": "nucontrole-v2",
   "private": true,
   "type": "module",
+  "prisma": {
+    "schema": "database/prisma/schema.prisma"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
