@@ -6,6 +6,13 @@ describe('GET /api/v1/status', () => {
     expect(response.status).toBe(200)
 
     const responseBody = await response.json()
+    const parsedUpdatedAt = new Date(responseBody.updated_at).toISOString();
+    expect(responseBody.updated_at).toBeDefined()
+    expect(responseBody.updated_at).toBe(parsedUpdatedAt);
+    expect(responseBody.dependencies.database.version).toBeDefined()
+    expect(responseBody.dependencies.database.max_connections).toBeDefined()
+    expect(responseBody.dependencies.database.opened_connections).toBeDefined()
+    // expect(responseBody.dependencies.database.opened_connections).toEqual(1)
     expect(responseBody).toMatchObject({
       updated_at: expect.any(String),
       dependencies: {
