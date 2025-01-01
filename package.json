@@ -8,8 +8,8 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "npm run services:up && npm run wait-for-postgres && npx prisma db push && nuxt dev",
-    "services:up": "docker-compose up -d",
-    "services:down": "docker-compose down",
+    "services:up": "docker compose up -d",
+    "services:down": "docker compose down",
     "test": "npm run services:up && concurrently -n nuxt,vitest --hide nuxt -k -s command-vitest \"nuxt dev\" \"vitest --run\"",
     "test:watch": "vitest watch",
     "test:coverage": "vitest run --coverage",
