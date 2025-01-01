@@ -7,7 +7,7 @@
   },
   "scripts": {
     "build": "nuxt build",
-    "dev": "npm run services:up && nuxt dev",
+    "dev": "npm run services:up && npm run wait-for-postgres && npx prisma db push && nuxt dev",
     "services:up": "docker-compose up -d",
     "services:down": "docker-compose down",
     "test": "npm run services:up && concurrently -n nuxt,vitest --hide nuxt -k -s command-vitest \"nuxt dev\" \"vitest --run\"",
@@ -21,7 +21,8 @@
     "migration:up": "npx prisma migrate dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "wait-for-postgres": "ts-node --esm infra/database/scripts/wait-for-postgres.cjs"
   },
   "dependencies": {
     "@prisma/nuxt": "^0.2.0",
