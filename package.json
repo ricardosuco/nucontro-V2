@@ -3,14 +3,14 @@
   "private": true,
   "type": "module",
   "prisma": {
-    "schema": "database/prisma/schema.prisma"
+    "schema": "infra/database/prisma/schema.prisma"
   },
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "npm run services:up && nuxt dev",
     "services:up": "docker-compose up -d",
     "services:down": "docker-compose down",
-    "test": "npm run services:up && vitest --no-threads",
+    "test": "npm run services:up && concurrently -n nuxt,vitest --hide nuxt -k -s command-vitest \"nuxt dev\" \"vitest --run\"",
     "test:watch": "vitest watch",
     "test:coverage": "vitest run --coverage",
     "lint:prettier:check": "prettier --check .",
@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@prisma/nuxt": "^0.2.0",
+    "async-retry": "^1.3.3",
     "nuxt": "^3.15.0",
     "vite": "^6.0.6",
     "vue": "latest",
@@ -32,8 +33,10 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "^0.7.4",
+    "@types/async-retry": "^1.4.9",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/test-utils": "^2.4.6",
+    "concurrently": "^9.1.2",
     "dotenv-expand": "^12.0.1",
     "eslint": "^9.17.0",
     "happy-dom": "^16.0.1",
