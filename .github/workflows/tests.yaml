@@ -7,16 +7,6 @@ jobs:
     name: Vitest Ubuntu
     runs-on: ubuntu-latest
     steps:
-      - name: Make env file
-        uses: SpicyPizza/create-envfile@v2.0
-        with:
-            envkey_POSTEGRES_USER: ${{ secrets.POSTEGRES_USER }}
-            envkey_POSTEGRES_PASSWORD: ${{ secrets.POSTEGRES_PASSWORD }}
-            envkey_POSTEGRES_HOST: ${{ secrets.POSTEGRES_HOST }}
-            envkey_POSTEGRES_PORT: ${{ secrets.POSTEGRES_PORT }}
-            envkey_POSTEGRES_DATABASE: ${{ secrets.POSTEGRES_DATABASE }}
-            envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
-            envkey_NODE_ENV: ${{ secrets.NODE_ENV }}
 
       - uses: actions/checkout@v4
 
@@ -24,7 +14,17 @@ jobs:
         with:
           node-version: 18.20.5
 
-      - run: cat .env
+      - name: Create .env file
+        run: |
+            echo "POSTGRES_USER: ${{ secrets.POSTGRES_USER }}" >> .env
+            echo "POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}" >> .env
+            echo "POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}" >> .env
+            echo "POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}" >> .env
+            echo "POSTGRES_DATABASE: ${{ secrets.POSTGRES_DATABASE }}" >> .env
+            echo "DATABASE_URL: ${{ secrets.DATABASE_URL }}" >> .env
+            echo "NODE_ENV: ${{ secrets.NODE_ENV }}" >> .env
+
+      - run: ls
 
       - run: npm ci
 
