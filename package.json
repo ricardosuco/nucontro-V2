@@ -7,11 +7,11 @@
   },
   "scripts": {
     "build": "nuxt build",
-    "dev": "npm run services:up && npm run migration:push && nuxt dev",
+    "dev": "npm run services:up && npm run migration:up && nuxt dev",
     "services:up": "docker compose up -d",
     "services:down": "docker compose down",
     "services:stop": "docker compose stop",
-    "test": "npm run services:up && npm run migration:push && concurrently -n nuxt,vitest --hide nuxt -k -s command-vitest \"nuxt dev\" \"vitest --run\"",
+    "test": "npm run services:up && npm run migration:up && concurrently -n nuxt,vitest --hide nuxt -k -s command-vitest \"nuxt dev\" \"vitest --run\"",
     "test:watch": "vitest watch",
     "test:coverage": "vitest run --coverage",
     "lint:prettier:check": "prettier --check .",
@@ -19,12 +19,13 @@
     "lint:eslint:check": "eslint .",
     "lint:eslint:fix": "eslint --fix .",
     "lint:fix": "npm run lint:prettier:fix && npm run lint:eslint:fix",
-    "migration:up": "npx prisma migrate dev",
-    "migration:push": "npm run wait-for-database && npx prisma db push",
+    "migration:create": "npx prisma migrate dev",
+    "migration:up": "npm run wait-for-database && npx prisma db push",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "wait-for-database": "ts-node --esm infra/database/scripts/wait-for-database.cjs"
+    "wait-for-database": "ts-node --esm infra/database/scripts/wait-for-database.cjs",
+    "vercel-build": "npx prisma migrate deploy"
   },
   "dependencies": {
     "@prisma/nuxt": "^0.2.0",
