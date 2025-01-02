@@ -7,11 +7,24 @@ jobs:
     name: Vitest Ubuntu
     runs-on: ubuntu-latest
     steps:
+      - name: Make env file
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+            envkey_POSTEGRES_USER: ${{ secrets.POSTEGRES_USER }}
+            envkey_POSTEGRES_PASSWORD: ${{ secrets.POSTEGRES_PASSWORD }}
+            envkey_POSTEGRES_HOST: ${{ secrets.POSTEGRES_HOST }}
+            envkey_POSTEGRES_PORT: ${{ secrets.POSTEGRES_PORT }}
+            envkey_POSTEGRES_DATABASE: ${{ secrets.POSTEGRES_DATABASE }}
+            envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+            envkey_NODE_ENV: ${{ secrets.NODE_ENV }}
+
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
           node-version: 18.20.5
+
+      - run: cat .env
 
       - run: npm ci
 
