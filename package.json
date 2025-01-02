@@ -6,7 +6,7 @@
     "schema": "infra/database/prisma/schema.prisma"
   },
   "scripts": {
-    "build": "nuxt build",
+    "build": "nuxt build && npm run migration:prod",
     "dev": "npm run services:up && npm run migration:up && nuxt dev",
     "services:up": "docker compose up -d",
     "services:down": "docker compose down",
@@ -25,7 +25,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "wait-for-database": "ts-node --esm infra/database/scripts/wait-for-database.cjs",
-    "vercel-build": "npx prisma migrate deploy"
+    "migration:prod": "npx prisma migrate deploy"
   },
   "dependencies": {
     "@prisma/nuxt": "^0.2.0",
