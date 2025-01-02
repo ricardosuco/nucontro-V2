@@ -6,7 +6,7 @@
     "schema": "infra/database/prisma/schema.prisma"
   },
   "scripts": {
-    "build": "nuxt build && npm run migration:prod",
+    "build": "nuxt build && npm run migration:prod && npx prisma generate",
     "dev": "npm run services:up && npm run migration:up && nuxt dev",
     "services:up": "docker compose up -d",
     "services:down": "docker compose down",
