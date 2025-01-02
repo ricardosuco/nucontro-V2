@@ -10,7 +10,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:postgres@localhost:4545/nucontrole?schema=public"
+  // url      = "postgresql://postgres:postgres@localhost:4545/nucontrole?schema=public"
+  url = env("DATABASE_URL")
 }
 
 model User {
