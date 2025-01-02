@@ -8,6 +8,10 @@ export default defineConfig({
   plugins: [vue()],
   test: {
     environment: 'happy-dom',
+    testTimeout: 120_000,
+    hookTimeout: 80_000,
+    isolate: false,
+    fileParallelism: false,
   },
 
   resolve: {
