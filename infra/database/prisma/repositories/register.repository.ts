@@ -13,7 +13,7 @@ export class RegisterRepository implements IRepository<Register> {
   }
 
   async create(data: Register): Promise<Register> {
-    return this.prisma.register.create({data})
+    return this.prisma.register.create({ data })
   }
 
   async update(id: number, data: Partial<Register>): Promise<Register | null> {
