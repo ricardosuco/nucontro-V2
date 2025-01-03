@@ -23,9 +23,10 @@
     "migration:up": "npm run wait-for-database && npx prisma db push",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare && npm run migration:prod && npx prisma generate --schema=infra/database/prisma/schema.prisma",
+    "postinstall": "nuxt prepare",
     "wait-for-database": "ts-node --esm infra/database/scripts/wait-for-database.cjs",
-    "migration:prod": "npx prisma migrate deploy"
+    "migration:prod": "npx prisma migrate deploy",
+    "vercel-build": "npm run migration:prod && npx prisma generate --schema=infra/database/prisma/schema.prisma"
   },
   "dependencies": {
     "@prisma/nuxt": "^0.2.0",
