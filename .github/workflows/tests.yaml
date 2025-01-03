@@ -23,8 +23,6 @@ jobs:
           echo "DATABASE_URL: ${{ secrets.DATABASE_URL }}" >> .env
           echo "NODE_ENV: ${{ secrets.NODE_ENV }}" >> .env
 
-      - run: ls
-
       - run: npm ci
 
       - run: npm test
