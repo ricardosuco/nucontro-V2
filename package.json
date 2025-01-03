@@ -6,7 +6,7 @@
     "schema": "infra/database/prisma/schema.prisma"
   },
   "scripts": {
-    "build": "nuxt build && npm run migration:prod && npx prisma generate",
+    "build": "nuxt build",
     "dev": "npm run services:up && npm run migration:up && nuxt dev",
     "services:up": "docker compose up -d",
     "services:down": "docker compose down",
@@ -23,7 +23,7 @@
     "migration:up": "npm run wait-for-database && npx prisma db push",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
+    "postinstall": "nuxt prepare && npm run migration:prod && npx prisma generate --schema=infra/database/prisma/schema.prisma",
     "wait-for-database": "ts-node --esm infra/database/scripts/wait-for-database.cjs",
     "migration:prod": "npx prisma migrate deploy"
   },
